@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Saki.BaseTemplate\Saki.BaseTemplate.csproj" />
+    <ProjectReference Include="..\Saki.DomainTemplate\Saki.DomainTemplate.csproj" />
+    <ProjectReference Include="..\Saki.RepositoryTemplate\Saki.RepositoryTemplate.csproj" />
+  </ItemGroup>
+
+</Project>
