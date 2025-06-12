@@ -5,7 +5,7 @@ public class BaseDbConfig
     /// <summary>
     ///     主库配置
     /// </summary>
-    public static string ConnectionString { get; set; }
+    public static string DefaultConnection { get; set; }
 
     /// <summary>
     ///     从库配置

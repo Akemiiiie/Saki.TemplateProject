@@ -18,7 +18,7 @@ public class SqlSugarDbContext<T> where T : class, new()
         Db = new SqlSugarClient(new ConnectionConfig
         {
             // 主库配置
-            ConnectionString = BaseDbConfig.ConnectionString,
+            ConnectionString = BaseDbConfig.DefaultConnection,
             DbType = DbType.SqlServer,
             InitKeyType = InitKeyType.Attribute, //从特性读取主键和自增列信息
             IsAutoCloseConnection = true, //开启自动释放模式

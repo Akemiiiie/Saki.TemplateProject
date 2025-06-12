@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.SimpleIdServer", "Saki
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.OpenIddictServer", "Saki.OpenIddictServer\Saki.OpenIddictServer.csproj", "{55DCCFBE-7CB3-43B5-B627-22C8394A2B72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.TemplateWebProject.v2", "Saki.TemplateWebProject.v2\Saki.TemplateWebProject.v2.csproj", "{68011039-E0D4-4D89-AC4B-453A9A79860E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.TemplateWebProject.v3", "Saki.TemplateWebProject.v3\Saki.TemplateWebProject.v3.csproj", "{CFC3636E-C214-464C-8852-16BA8C072E5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{55DCCFBE-7CB3-43B5-B627-22C8394A2B72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55DCCFBE-7CB3-43B5-B627-22C8394A2B72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55DCCFBE-7CB3-43B5-B627-22C8394A2B72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68011039-E0D4-4D89-AC4B-453A9A79860E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68011039-E0D4-4D89-AC4B-453A9A79860E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68011039-E0D4-4D89-AC4B-453A9A79860E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68011039-E0D4-4D89-AC4B-453A9A79860E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFC3636E-C214-464C-8852-16BA8C072E5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFC3636E-C214-464C-8852-16BA8C072E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFC3636E-C214-464C-8852-16BA8C072E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFC3636E-C214-464C-8852-16BA8C072E5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
