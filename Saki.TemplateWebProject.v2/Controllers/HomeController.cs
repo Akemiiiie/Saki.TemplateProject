@@ -20,6 +20,7 @@ public class HomeController : BaseController
     [HttpGet]
     public async Task<IActionResult> GetUser([FromQuery] string Id)
     {
+        // Test
         var res = await _usersService.GetUser(Id);
         return Ok(res);
     }
