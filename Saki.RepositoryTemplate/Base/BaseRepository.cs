@@ -1,4 +1,4 @@
-﻿using Saki.BaseTemplate.AutofacRegister;
+﻿using Saki.AutoFac.AutofacRegister;
 using Saki.IRepositoryTemplate.Base;
 using Saki.RepositoryTemplate.DBClients;
 

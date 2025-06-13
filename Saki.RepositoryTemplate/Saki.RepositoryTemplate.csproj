@@ -8,12 +8,14 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.5" />
+    <PackageReference Include="OpenIddict.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Saki.BaseTemplate\Saki.BaseTemplate.csproj" />
+    <ProjectReference Include="..\Saki.AutoFac\Saki.AutoFac.csproj" />
     <ProjectReference Include="..\Saki.IRepositoryTemplate\Saki.IRepositoryTemplate.csproj" />
     <ProjectReference Include="..\Saki.ModelTemplate\Saki.ModelTemplate.csproj" />
   </ItemGroup>

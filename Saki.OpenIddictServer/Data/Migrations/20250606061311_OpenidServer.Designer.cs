@@ -6,12 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Saki.OpenIddictServer.Data;
+using Saki.RepositoryTemplate.DBClients;
 
 #nullable disable
 
 namespace Saki.OpenIddictServer.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(EFDbContext))]
     [Migration("20250606061311_OpenidServer")]
     partial class OpenidServer
     {

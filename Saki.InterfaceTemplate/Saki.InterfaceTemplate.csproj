@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Saki.AutoFac\Saki.AutoFac.csproj" />
     <ProjectReference Include="..\Saki.BaseTemplate\Saki.BaseTemplate.csproj" />
     <ProjectReference Include="..\Saki.ModelTemplate\Saki.ModelTemplate.csproj" />
   </ItemGroup>

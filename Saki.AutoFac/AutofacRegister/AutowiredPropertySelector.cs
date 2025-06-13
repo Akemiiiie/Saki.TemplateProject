@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Saki.BaseTemplate.AutofacRegister
+namespace Saki.AutoFac.AutofacRegister
 {
     /// <summary>
     /// 新增依赖注入特性类

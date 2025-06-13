@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Saki.BaseTemplate.AutofacRegister;
+using Saki.AutoFac.AutofacRegister;
 using Saki.BaseTemplate.BaseControllers;
 using Saki.InterfaceTemplate.Users;
 
@@ -8,7 +8,6 @@ namespace Saki.TemplateWebProject.v1.Controllers;
 /// <summary>
 ///     Home控制器
 /// </summary>
-// [DynamicWebApi]
 public class HomeController : BaseController
 {
     [AutowiredProperty] private IUsersServiceInterface _usersService { get; set; }

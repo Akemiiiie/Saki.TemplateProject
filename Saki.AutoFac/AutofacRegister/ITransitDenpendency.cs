@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Saki.BaseTemplate.AutofacRegister
+namespace Saki.AutoFac.AutofacRegister
 {
     /// <summary>
-    /// 瞬时依赖注入标记接口
+    /// 作用域依赖注入标记接口
     /// </summary>
-    public interface IScopeDenpendency
+    public interface ITransitDenpendency
     {
-
     }
 }

@@ -1,4 +1,4 @@
-﻿using Saki.BaseTemplate.AutofacRegister;
+﻿using Saki.AutoFac.AutofacRegister;
 using Saki.BaseTemplate.Utils;
 using Saki.ModelTemplate.Bases;
 using Saki.ModelTemplate.Dtos;

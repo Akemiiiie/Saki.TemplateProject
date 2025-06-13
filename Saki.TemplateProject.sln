@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.InterfaceTemplate", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.IRepositoryTemplate", "Saki.IRepositoryTemplate\Saki.IRepositoryTemplate.csproj", "{D8CCC15E-D150-4512-B75B-9027E7C0B2EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.TemplateWebProject.v1", "Saki.TemplateWebProject.v1\Saki.TemplateWebProject.v1.csproj", "{B6987375-BA44-4F8E-A062-161EC8660F6D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.SimpleIdServer", "Saki.SimpleIdServer\Saki.SimpleIdServer.csproj", "{E61877C7-98B3-40B2-9510-B212E5FC2E2F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.OpenIddictServer", "Saki.OpenIddictServer\Saki.OpenIddictServer.csproj", "{55DCCFBE-7CB3-43B5-B627-22C8394A2B72}"
@@ -24,6 +22,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.TemplateWebProject.v2", "Saki.TemplateWebProject.v2\Saki.TemplateWebProject.v2.csproj", "{68011039-E0D4-4D89-AC4B-453A9A79860E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.TemplateWebProject.v3", "Saki.TemplateWebProject.v3\Saki.TemplateWebProject.v3.csproj", "{CFC3636E-C214-464C-8852-16BA8C072E5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.TemplateWebProject.v1", "Saki.TemplateWebProject.v1\Saki.TemplateWebProject.v1.csproj", "{1C50A772-541F-1028-1AE4-54FBBE512BD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.AutoFac", "Saki.AutoFac\Saki.AutoFac.csproj", "{CF77683E-13DB-423E-8821-9D861E312848}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.DynamicWebApi", "Saki.DynamicWebApi\Saki.DynamicWebApi.csproj", "{76F2DCD1-D662-4890-919B-5F74D15303A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,10 +59,6 @@ Global
 		{D8CCC15E-D150-4512-B75B-9027E7C0B2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8CCC15E-D150-4512-B75B-9027E7C0B2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8CCC15E-D150-4512-B75B-9027E7C0B2EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B6987375-BA44-4F8E-A062-161EC8660F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6987375-BA44-4F8E-A062-161EC8660F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6987375-BA44-4F8E-A062-161EC8660F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6987375-BA44-4F8E-A062-161EC8660F6D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E61877C7-98B3-40B2-9510-B212E5FC2E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E61877C7-98B3-40B2-9510-B212E5FC2E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E61877C7-98B3-40B2-9510-B212E5FC2E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,6 +75,18 @@ Global
 		{CFC3636E-C214-464C-8852-16BA8C072E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFC3636E-C214-464C-8852-16BA8C072E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFC3636E-C214-464C-8852-16BA8C072E5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C50A772-541F-1028-1AE4-54FBBE512BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C50A772-541F-1028-1AE4-54FBBE512BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C50A772-541F-1028-1AE4-54FBBE512BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C50A772-541F-1028-1AE4-54FBBE512BD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF77683E-13DB-423E-8821-9D861E312848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF77683E-13DB-423E-8821-9D861E312848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF77683E-13DB-423E-8821-9D861E312848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF77683E-13DB-423E-8821-9D861E312848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76F2DCD1-D662-4890-919B-5F74D15303A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76F2DCD1-D662-4890-919B-5F74D15303A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76F2DCD1-D662-4890-919B-5F74D15303A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76F2DCD1-D662-4890-919B-5F74D15303A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

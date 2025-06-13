@@ -10,8 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.16" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -29,8 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Saki.AutoFac\Saki.AutoFac.csproj" />
     <ProjectReference Include="..\Saki.BaseTemplate\Saki.BaseTemplate.csproj" />
     <ProjectReference Include="..\Saki.DomainTemplate\Saki.DomainTemplate.csproj" />
+    <ProjectReference Include="..\Saki.DynamicWebApi\Saki.DynamicWebApi.csproj" />
     <ProjectReference Include="..\Saki.InterfaceTemplate\Saki.InterfaceTemplate.csproj" />
     <ProjectReference Include="..\Saki.RepositoryTemplate\Saki.RepositoryTemplate.csproj" />
   </ItemGroup>

@@ -7,8 +7,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using Panda.DynamicWebApi;
 using Saki.RepositoryTemplate.Base;
-using Saki.TemplateWebProject.v1.Startups;
-using Saki.TemplateWebProject.v2.Data;
+using Saki.RepositoryTemplate.DBClients;
+using Saki.TemplateWebProject.v2.Startups;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 
@@ -16,20 +16,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // 读取配置文件
-
 var configBuilder = new ConfigurationBuilder();
 configBuilder.AddJsonFile("appsettings.json", true, true);
 IConfiguration configRoot = configBuilder.Build();
 configRoot.GetSection("ConnectionStrings").Get<BaseDbConfig>();
 
 // EF数据库上下文配置（需要升级到EF9.0否则无法正常使用EF，以及数据初始化功能，且会在初始化数据连接时报错）
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<EFDbContext>(options =>
     options.UseSqlServer(BaseDbConfig.DefaultConnection));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddRazorPages();
+    .AddEntityFrameworkStores<EFDbContext>();
 
 // Autofac自动注入(此处会注入数据库上下文的数据库连接)
 builder.Services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
@@ -37,6 +35,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder => { builder.RegisterModule<AutofacRegisterModule>(); });
 
 // 添加MVC中间件,不添加会导致无法正常访问接口
+builder.Services.AddRazorPages();
 builder.Services.AddMvc();
 // 动态api
 builder.Services.AddDynamicWebApi();

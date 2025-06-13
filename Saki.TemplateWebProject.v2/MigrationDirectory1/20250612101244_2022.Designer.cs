@@ -5,13 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Saki.RepositoryTemplate.DBClients;
 using Saki.TemplateWebProject.v2.Data;
 
 #nullable disable
 
 namespace Saki.TemplateWebProject.v2.MigrationDirectory1
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(EFDbContext))]
     [Migration("20250612101244_2022")]
     partial class _2022
     {
