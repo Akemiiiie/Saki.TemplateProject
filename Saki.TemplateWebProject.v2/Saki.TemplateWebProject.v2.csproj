@@ -9,6 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
@@ -33,6 +43,7 @@
     <ProjectReference Include="..\Saki.DomainTemplate\Saki.DomainTemplate.csproj" />
     <ProjectReference Include="..\Saki.DynamicWebApi\Saki.DynamicWebApi.csproj" />
     <ProjectReference Include="..\Saki.InterfaceTemplate\Saki.InterfaceTemplate.csproj" />
+    <ProjectReference Include="..\Saki.MiniProfiler\Saki.MiniProfiler.csproj" />
     <ProjectReference Include="..\Saki.RepositoryTemplate\Saki.RepositoryTemplate.csproj" />
   </ItemGroup>
 

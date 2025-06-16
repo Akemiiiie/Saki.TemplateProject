@@ -1,16 +1,21 @@
 using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using Panda.DynamicWebApi;
+using Saki.MiniProfilerOption;
 using Saki.RepositoryTemplate.Base;
 using Saki.RepositoryTemplate.DBClients;
 using Saki.TemplateWebProject.v2.Startups;
+using StackExchange.Profiling.Storage;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +44,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddMvc();
 // 动态api
 builder.Services.AddDynamicWebApi();
+builder.Services.AddHttpContextAccessor();
 // 添加swagger
 builder.Services.AddSwaggerGen(options =>
 {
@@ -55,6 +61,12 @@ builder.Services.AddSwaggerGen(options =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
 });
+
+// 添加分析器中间件
+builder.Services.AddMiniProfiler(ProfilerDefaultOption.GetProfilerDefaultOption)
+    // AddEntityFramework是要监控EntityFrameworkCore生成的SQL
+    .AddEntityFramework();
+
 
 var app = builder.Build();
 
@@ -73,11 +85,17 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+// 启用分析器组件
+app.UseMiniProfiler();
+
 // 启用swagger
 app.UseSwagger();
 // 启用中间件为Swagger UI提供服务
 app.UseSwaggerUI(c =>
 {
+    // 需要将文件设置为嵌入资源，并且设置为较新则复制
+    c.IndexStream = () => Assembly.GetExecutingAssembly()
+        .GetManifestResourceStream("Saki.TemplateWebProject.v2.wwwroot.index.html");
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "我的MVC应用API V1");
     // 可选：设置默认展开的API
     c.DocExpansion(DocExpansion.None);
@@ -89,6 +107,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     "default",
     "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages()
     .WithStaticAssets();
+
 app.Run();

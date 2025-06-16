@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.AutoFac", "Saki.AutoFa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.DynamicWebApi", "Saki.DynamicWebApi\Saki.DynamicWebApi.csproj", "{76F2DCD1-D662-4890-919B-5F74D15303A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.MiniProfiler", "Saki.MiniProfiler\Saki.MiniProfiler.csproj", "{4CF5C4F9-E546-4860-AF8E-D95369FF82A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{76F2DCD1-D662-4890-919B-5F74D15303A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76F2DCD1-D662-4890-919B-5F74D15303A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76F2DCD1-D662-4890-919B-5F74D15303A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CF5C4F9-E546-4860-AF8E-D95369FF82A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CF5C4F9-E546-4860-AF8E-D95369FF82A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CF5C4F9-E546-4860-AF8E-D95369FF82A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CF5C4F9-E546-4860-AF8E-D95369FF82A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

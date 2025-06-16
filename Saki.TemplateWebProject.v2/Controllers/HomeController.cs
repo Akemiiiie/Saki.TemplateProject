@@ -2,6 +2,7 @@
 using Saki.AutoFac.AutofacRegister;
 using Saki.BaseTemplate.BaseControllers;
 using Saki.InterfaceTemplate.Users;
+using StackExchange.Profiling;
 
 namespace Saki.TemplateWebProject.v1.Controllers;
 
@@ -11,6 +12,12 @@ namespace Saki.TemplateWebProject.v1.Controllers;
 public class HomeController : BaseController
 {
     [AutowiredProperty] private IUsersServiceInterface _usersService { get; set; }
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
+    public HomeController(IHttpContextAccessor httpContextAccessor)
+    {
+        _httpContextAccessor = httpContextAccessor;
+    }
 
     /// <summary>
     ///     用户信息获取接口
@@ -41,5 +48,12 @@ public class HomeController : BaseController
     public IActionResult Index()
     {
         return View();
+    }
+
+    [HttpGet]
+    public IActionResult GetCounts()
+    {
+        var html = MiniProfiler.Current.RenderIncludes(_httpContextAccessor.HttpContext);
+        return Ok(html.Value);
     }
 }

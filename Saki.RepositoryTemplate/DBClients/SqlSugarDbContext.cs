@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Saki.RepositoryTemplate.Base;
 using SqlSugar;
+using StackExchange.Profiling;
 
 namespace Saki.RepositoryTemplate.DBClients;
 
@@ -45,6 +46,9 @@ public class SqlSugarDbContext<T> where T : class, new()
         //调式代码 用来打印SQL 
         Db.Aop.OnLogExecuting = (sql, pars) =>
         {
+            MiniProfiler.Current.
+                CustomTiming($"ConnId:[{Db.ContextID}] SQL：",
+                    "【SQL语句】：" + UtilMethods.GetNativeSql(sql, pars));
             Console.WriteLine(UtilMethods.GetNativeSql(sql, pars));
             //Console.WriteLine(sql + "\r\n" +
             //Db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));

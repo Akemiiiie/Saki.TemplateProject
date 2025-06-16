@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Saki.AutoFac\Saki.AutoFac.csproj" />
     <ProjectReference Include="..\Saki.IRepositoryTemplate\Saki.IRepositoryTemplate.csproj" />
+    <ProjectReference Include="..\Saki.MiniProfiler\Saki.MiniProfiler.csproj" />
     <ProjectReference Include="..\Saki.ModelTemplate\Saki.ModelTemplate.csproj" />
   </ItemGroup>
 
