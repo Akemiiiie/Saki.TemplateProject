@@ -8,11 +8,11 @@ namespace Saki.RepositoryTemplate.DBClients;
 public class SqlSugarDbContext<T> where T : class, new()
 {
     /// <summary>
-    ///     注入配置文件
+    /// 注入配置文件
     /// </summary>
 
-    //注意：不能写成静态的
-    public SqlSugarClient Db; //用来处理事务多表查询和复杂的操作
+    //注意：不能写成静态的，用来处理事务多表查询和复杂的操作
+    public SqlSugarClient Db; 
 
     public SqlSugarDbContext()
     {

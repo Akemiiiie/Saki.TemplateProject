@@ -104,9 +104,7 @@ app.UseSwaggerUI(c =>
 app.UseRouting();
 app.UseAuthorization();
 // ≈‰÷√¬∑”…
-app.MapControllerRoute(
-    "default",
-    "{controller=Home}/{action=Index}/{id?}");
+app.MapControllers();
 
 app.MapRazorPages()
     .WithStaticAssets();

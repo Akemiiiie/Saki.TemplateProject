@@ -23,13 +23,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.TemplateWebProject.v2"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.TemplateWebProject.v3", "Saki.TemplateWebProject.v3\Saki.TemplateWebProject.v3.csproj", "{CFC3636E-C214-464C-8852-16BA8C072E5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.TemplateWebProject.v1", "Saki.TemplateWebProject.v1\Saki.TemplateWebProject.v1.csproj", "{1C50A772-541F-1028-1AE4-54FBBE512BD3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.AutoFac", "Saki.AutoFac\Saki.AutoFac.csproj", "{CF77683E-13DB-423E-8821-9D861E312848}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.DynamicWebApi", "Saki.DynamicWebApi\Saki.DynamicWebApi.csproj", "{76F2DCD1-D662-4890-919B-5F74D15303A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.MiniProfiler", "Saki.MiniProfiler\Saki.MiniProfiler.csproj", "{4CF5C4F9-E546-4860-AF8E-D95369FF82A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.TemplateWebProject.v1", "Saki.TemplateWebProject.v1\Saki.TemplateWebProject.v1.csproj", "{1C50A772-541F-1028-1AE4-54FBBE512BD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,10 +77,6 @@ Global
 		{CFC3636E-C214-464C-8852-16BA8C072E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFC3636E-C214-464C-8852-16BA8C072E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFC3636E-C214-464C-8852-16BA8C072E5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C50A772-541F-1028-1AE4-54FBBE512BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C50A772-541F-1028-1AE4-54FBBE512BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C50A772-541F-1028-1AE4-54FBBE512BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C50A772-541F-1028-1AE4-54FBBE512BD3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF77683E-13DB-423E-8821-9D861E312848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF77683E-13DB-423E-8821-9D861E312848}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF77683E-13DB-423E-8821-9D861E312848}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -93,6 +89,10 @@ Global
 		{4CF5C4F9-E546-4860-AF8E-D95369FF82A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CF5C4F9-E546-4860-AF8E-D95369FF82A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CF5C4F9-E546-4860-AF8E-D95369FF82A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C50A772-541F-1028-1AE4-54FBBE512BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C50A772-541F-1028-1AE4-54FBBE512BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C50A772-541F-1028-1AE4-54FBBE512BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C50A772-541F-1028-1AE4-54FBBE512BD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
