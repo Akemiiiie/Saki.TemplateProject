@@ -48,27 +48,23 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddOpenIddict()
     .AddValidation(options =>
     {
-        // Configure the audience (required for JWT validation).
+        // 配置jwt鉴权服务器
         options.SetIssuer("https://localhost:7001/"); // Auth server URL
         options.AddAudiences("service-worker"); // Must match the audience in the auth server
-        // options.SetClientId("service-worker").SetClientSecret("388D45FA-B36B-4988-BA59-B187D329C207");
-        // If using symmetric encryption key for token validation (must match the auth server key).
-        // options.AddEncryptionKey(new SymmetricSecurityKey(
-        //     Convert.FromBase64String("DRjd/GnduI3Efzen9V9BvbNUfc/VKgXltV7Kbk9sMkY="))); // Use secure key management in production!
+        // 配置客户端以及客户端秘钥
+        options.UseIntrospection().SetClientId("service-worker").SetClientSecret("388D45FA-B36B-4988-BA59-B187D329C207");
 
-        // Use introspection if needed (for reference tokens).
-        // options.UseIntrospection()
-        //        .SetClientId("resource_server_1")
-        //        .SetClientSecret("846B62D0-DEF9-4215-A99D-86E6B8DAB342");
+        // options.AddEncryptionCertificate();
+        // 配置对称加密秘钥
+        options.AddEncryptionKey(new SymmetricSecurityKey(
+            Convert.FromBase64String("DRjd/GnduI3Efzen9V9BvbNUfc/VKgXltV7Kbk9sMkY="))); // Use secure key management in production!
 
         // Register the System.Net.Http integration for remote validation/introspection.
         options.UseSystemNetHttp();
-
         // Register the ASP.NET Core host.
         options.UseAspNetCore();
     });
 
-// 3. Authentication & Authorization
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;

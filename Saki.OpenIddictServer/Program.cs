@@ -57,19 +57,21 @@ builder.Services.AddOpenIddict().AddCore(options =>
         options.RegisterScopes("service-worker"); // 必须与资源服务器的Audience一致
         options.SetTokenEndpointUris("/connect/token"); // 令牌端点
         options.AcceptAnonymousClients();              // 允许公共客户端
-        options.AllowPasswordFlow().AllowClientCredentialsFlow(); // 允许密码授权流程
-                                                                  // options.AllowClientCredentialsFlow();          // 启用客户端凭据流
-                                                                  // options.AcceptAnonymousClients();              // 允许公共客户端
-        // 注册签名和加密凭证
+        options.AllowPasswordFlow()                    // 允许密码授权流程
+            .AllowClientCredentialsFlow();              // 启用客户端凭据流
+        // options.AcceptAnonymousClients();              // 允许公共客户端
+
+        // 注册签名和加密证书
         options.AddDevelopmentEncryptionCertificate()
             .AddDevelopmentSigningCertificate();
         // options.AddEncryptionCertificate(encryptionCert);
-        // options.AddSigningCertificate(signingCert); // 必须添加签名证书
+        // options.AddSigningCertificate(signingCert);
 
         // 注册 ASP.NET Core 主机并且配置 ASP.NET Core 选项
         options.UseAspNetCore()
             .EnableTokenEndpointPassthrough();
-        options.DisableAccessTokenEncryption();
+        // 不使用证书对JWT进行加密（仅在测试时使用，用于解密jwt查看对应内容进行调试）
+        //options.DisableAccessTokenEncryption();
     });
 
 builder.Services.AddAuthentication(options =>
