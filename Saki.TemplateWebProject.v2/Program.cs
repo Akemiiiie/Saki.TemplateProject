@@ -1,18 +1,17 @@
 using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using OpenIddict.Validation.AspNetCore;
 using Panda.DynamicWebApi;
 using Saki.MiniProfilerOption;
 using Saki.RepositoryTemplate.Base;
 using Saki.RepositoryTemplate.DBClients;
 using Saki.TemplateWebProject.v2.Startups;
-using StackExchange.Profiling.Storage;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 
@@ -45,6 +44,38 @@ builder.Services.AddMvc();
 // 动态api
 builder.Services.AddDynamicWebApi();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddOpenIddict()
+    .AddValidation(options =>
+    {
+        // Configure the audience (required for JWT validation).
+        options.SetIssuer("https://localhost:7001/"); // Auth server URL
+        options.AddAudiences("service-worker"); // Must match the audience in the auth server
+        // options.SetClientId("service-worker").SetClientSecret("388D45FA-B36B-4988-BA59-B187D329C207");
+        // If using symmetric encryption key for token validation (must match the auth server key).
+        // options.AddEncryptionKey(new SymmetricSecurityKey(
+        //     Convert.FromBase64String("DRjd/GnduI3Efzen9V9BvbNUfc/VKgXltV7Kbk9sMkY="))); // Use secure key management in production!
+
+        // Use introspection if needed (for reference tokens).
+        // options.UseIntrospection()
+        //        .SetClientId("resource_server_1")
+        //        .SetClientSecret("846B62D0-DEF9-4215-A99D-86E6B8DAB342");
+
+        // Register the System.Net.Http integration for remote validation/introspection.
+        options.UseSystemNetHttp();
+
+        // Register the ASP.NET Core host.
+        options.UseAspNetCore();
+    });
+
+// 3. Authentication & Authorization
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
+});
+
+
 // 添加swagger
 builder.Services.AddSwaggerGen(options =>
 {
@@ -102,6 +133,7 @@ app.UseSwaggerUI(c =>
 });
 
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 // 配置路由
 app.MapControllers();

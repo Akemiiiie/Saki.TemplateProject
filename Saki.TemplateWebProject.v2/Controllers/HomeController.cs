@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using OpenIddict.Validation.AspNetCore;
 using Panda.DynamicWebApi.Attributes;
 using Saki.AutoFac.AutofacRegister;
 using Saki.BaseTemplate.BaseControllers;
@@ -23,11 +25,12 @@ public class HomeController : BaseController
     }
 
     /// <summary>
-    ///     用户信息获取接口
+    /// 用户信息获取接口
     /// </summary>
     /// <param name="Id">用户主键Id</param>
     /// <returns>基础用户信息dto</returns>
     [HttpGet]
+    [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     public async Task<IActionResult> GetUser([FromQuery] string Id)
     {
         // Test

@@ -14,13 +14,19 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.6" />
+    <PackageReference Include="OpenIddict.AspNetCore" Version="6.4.0" />
     <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="6.2.0" />
+    <PackageReference Include="OpenIddict.Validation.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Saki.AutoFac\Saki.AutoFac.csproj" />
     <ProjectReference Include="..\Saki.DynamicWebApi\Saki.DynamicWebApi.csproj" />
     <ProjectReference Include="..\Saki.RepositoryTemplate\Saki.RepositoryTemplate.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Authorization\" />
   </ItemGroup>
 
 </Project>

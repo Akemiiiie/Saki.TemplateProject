@@ -1,10 +1,10 @@
-using Autofac.Core;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OpenIddict.Validation.AspNetCore;
 using Saki.OpenIddictServer.Startups;
 using Saki.RepositoryTemplate.Base;
 using Saki.RepositoryTemplate.DBClients;
-using System.Configuration;
+using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,45 +23,59 @@ builder.Services.AddHostedService<HostedService>();
 builder.Services.AddDbContext<EFDbContext>(options =>
 {
     // 配置 EfCore 使用 Microsoft SQL Server 数据库
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), builder =>
-    {
-        builder.MigrationsAssembly("Saki.OpenIddictServer");
-    });
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+        builder => { builder.MigrationsAssembly("Saki.OpenIddictServer"); });
 
     // 注册OpenIddict所需的数据实体集。
     // 注意：如果你需要替换默认的OpenIddict实体，请使用泛型重载方法
     options.UseOpenIddict();
 });
+//
+// var encryptionCert = new X509Certificate2(
+//     "encryption.pfx",
+//     "005917",
+//     X509KeyStorageFlags.MachineKeySet |
+//     X509KeyStorageFlags.PersistKeySet |
+//     X509KeyStorageFlags.Exportable); // 导出权限可选
+// var signingCert = new X509Certificate2(
+//     "signing.pfx",
+//     "005917",
+//     X509KeyStorageFlags.MachineKeySet |
+//     X509KeyStorageFlags.PersistKeySet |
+//     X509KeyStorageFlags.Exportable);
 
-// 注册 OpenIddict 核心组件。
 builder.Services.AddOpenIddict().AddCore(options =>
-{
-    // 配置 OpenIddict 使用 Entity Framework Core 存储和模型。
-    // 注意：调用 ReplaceDefaultEntities() 来替换默认实体。
-    options.UseEntityFrameworkCore()
-        .UseDbContext<EFDbContext>();
-});
-
-
-builder.Services.AddOpenIddict()
-
+    {
+        // 配置 OpenIddict 使用 Entity Framework Core 存储和模型。
+        // 注意：调用 ReplaceDefaultEntities() 来替换默认实体。
+        options.UseEntityFrameworkCore()
+            .UseDbContext<EFDbContext>();
+    })
     // 注册 OpenIddict 服务器组件
     .AddServer(options =>
     {
-        // 启用 token 端点
-        options.SetTokenEndpointUris("connect/token");
-
-        // 启用客户端凭据流
-        options.AllowClientCredentialsFlow();
-
+        options.RegisterScopes("service-worker"); // 必须与资源服务器的Audience一致
+        options.SetTokenEndpointUris("/connect/token"); // 令牌端点
+        options.AcceptAnonymousClients();              // 允许公共客户端
+        options.AllowPasswordFlow().AllowClientCredentialsFlow(); // 允许密码授权流程
+                                                                  // options.AllowClientCredentialsFlow();          // 启用客户端凭据流
+                                                                  // options.AcceptAnonymousClients();              // 允许公共客户端
         // 注册签名和加密凭证
         options.AddDevelopmentEncryptionCertificate()
             .AddDevelopmentSigningCertificate();
+        // options.AddEncryptionCertificate(encryptionCert);
+        // options.AddSigningCertificate(signingCert); // 必须添加签名证书
 
         // 注册 ASP.NET Core 主机并且配置 ASP.NET Core 选项
         options.UseAspNetCore()
             .EnableTokenEndpointPassthrough();
+        options.DisableAccessTokenEncryption();
     });
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
+});
 
 // 添加MVC中间件,不添加会导致无法正常访问接口
 // builder.Services.AddRazorPages();
