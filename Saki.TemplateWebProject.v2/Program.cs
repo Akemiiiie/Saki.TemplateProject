@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Validation.AspNetCore;
 using Panda.DynamicWebApi;
@@ -82,6 +83,40 @@ builder.Services.AddSwaggerGen(options =>
         Description = "这是一个用于构建工程的.netCore mvc项目模板",
         Contact = new OpenApiContact { Name = "Saki'CoreTemplate", Email = "2567241787@qq.com" }
     });
+    options.AddSecurityDefinition(
+        "oauth",
+        new OpenApiSecurityScheme
+        {
+            Flows = new OpenApiOAuthFlows
+            {
+                // 证书获取地址
+                ClientCredentials = new OpenApiOAuthFlow
+                {
+                    Scopes = new Dictionary<string, string>
+                    {
+                        ["api"] = "api scope description"
+                    },
+                    TokenUrl = new Uri("https://localhost:7001/connect/token"),
+                },
+            },
+            In = ParameterLocation.Header,
+            Name = HeaderNames.Authorization,
+            Type = SecuritySchemeType.OAuth2
+        }
+    );
+    options.AddSecurityRequirement(
+        new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                        { Type = ReferenceType.SecurityScheme, Id = "oauth" },
+                },
+                new[] { "api" }
+            }
+        }
+    );
     options.DocInclusionPredicate((name, api) => api.HttpMethod != null);
     // 可选：为XML注释添加支持
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

@@ -3,15 +3,15 @@ using OpenIddict.Abstractions;
 using Saki.ModelTemplate.Bases;
 using Saki.RepositoryTemplate.DBClients;
 using static OpenIddict.Abstractions.OpenIddictConstants;
+using BC = BCrypt.Net.BCrypt; // Using BCrypt.Net for password hashing
 
 public class ClientsSeeder
 {
-    private readonly IOpenIddictApplicationManager _applicationManager;
     private readonly EFDbContext _context;
+    private readonly IOpenIddictApplicationManager _applicationManager;
     private readonly IOpenIddictScopeManager _scopeManager;
 
-    public ClientsSeeder(EFDbContext context, IOpenIddictApplicationManager appManager,
-        IOpenIddictScopeManager scopeManager)
+    public ClientsSeeder(EFDbContext context, IOpenIddictApplicationManager appManager, IOpenIddictScopeManager scopeManager)
     {
         _context = context;
         _applicationManager = appManager;
@@ -26,7 +26,7 @@ public class ClientsSeeder
         await AddWebApiClientAsync();
         await AddMvcClientAsync();
         await AddOidcDebuggerClientAsync();
-        // await AddInitUsersAsync();
+        await AddInitUsersAsync();
     }
 
     private async Task AddScopesAsync()
@@ -35,26 +35,24 @@ public class ClientsSeeder
         if (await _scopeManager.FindByNameAsync(Scopes.OpenId) is null)
             await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor { Name = Scopes.OpenId });
         if (await _scopeManager.FindByNameAsync(Scopes.Profile) is null)
-            await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor
-            {
-                Name = Scopes.Profile, Resources = { "resource_server_1" }
-            }); // Link profile scope to resource server
+            await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor { Name = Scopes.Profile, Resources = { "resource_server_1" } }); // Link profile scope to resource server
         if (await _scopeManager.FindByNameAsync(Scopes.Email) is null)
             await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor { Name = Scopes.Email });
         if (await _scopeManager.FindByNameAsync(Scopes.Roles) is null)
             await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor { Name = Scopes.Roles });
         if (await _scopeManager.FindByNameAsync(Scopes.OfflineAccess) is null)
-            await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor
-                { Name = Scopes.OfflineAccess }); // For Refresh Tokens
+            await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor { Name = Scopes.OfflineAccess }); // For Refresh Tokens
 
         // Custom API scope
         if (await _scopeManager.FindByNameAsync("api1") is null)
+        {
             await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor
             {
                 Name = "api1",
                 DisplayName = "API 1 Access",
                 Resources = { "resource_server_1" } // Associate scope with the resource server audience
             });
+        }
     }
 
     private async Task AddWebApiClientAsync() // For Swagger UI / Postman / SPA
@@ -71,7 +69,7 @@ public class ClientsSeeder
             RedirectUris =
             {
                 // For Swagger UI
-                new Uri("https://localhost:7002/swagger/oauth2-redirect.html")
+                new Uri("https://localhost:7002/swagger/oauth2-redirect.html"), 
                 // Add URIs for your SPA if applicable
                 // new Uri("http://localhost:4200/callback") 
             },
@@ -85,7 +83,7 @@ public class ClientsSeeder
                 Permissions.Endpoints.Authorization,
                 Permissions.Endpoints.Token,
                 // Permissions.Endpoints.Logout,
-
+                
                 // Grant types allowed
                 Permissions.GrantTypes.AuthorizationCode,
                 Permissions.GrantTypes.RefreshToken, // Allow refresh tokens
@@ -139,7 +137,7 @@ public class ClientsSeeder
                 // Permissions.Scopes.OpenId,
                 Permissions.Scopes.Profile,
                 Permissions.Scopes.Email,
-                Permissions.Scopes.Roles
+                Permissions.Scopes.Roles,
                 // Permissions.Scopes.OfflineAccess
                 // Note: MVC client usually doesn't need direct API scope ('api1')
                 // It gets user info via ID token and makes API calls on behalf of the user later.
@@ -179,7 +177,7 @@ public class ClientsSeeder
                 Permissions.Scopes.Profile,
                 Permissions.Scopes.Email,
                 Permissions.Scopes.Roles,
-                $"{Permissions.Prefixes.Scope}api1"
+                 $"{Permissions.Prefixes.Scope}api1"
             },
             Requirements =
             {
@@ -188,28 +186,32 @@ public class ClientsSeeder
         });
     }
 
-    // private async Task AddInitUsersAsync()
-    // {
-    //     if (await _context.Users.AnyAsync()) return; // Only seed if no users exist
-    //
-    //     await _context.Users.AddRangeAsync(
-    //         new OpneidUser
-    //         {
-    //             UserName = "test1",
-    //             Email = "test1@example.com",
-    //             PasswordHash = BC.HashPassword("Password123!"), // Hash the password!
-    //             Mobile = "110",
-    //             Remark = "Initial test user 1"
-    //         },
-    //         new OpneidUser
-    //         {
-    //             UserName = "test2",
-    //             Email = "test2@example.com",
-    //             PasswordHash = BC.HashPassword("Password123!"),
-    //             Mobile = "119",
-    //             Remark = "Initial test user 2"
-    //         }
-    //     );
-    //     await _context.SaveChangesAsync();
-    // }
+    private async Task AddInitUsersAsync()
+    {
+        if (await _context.Users.AnyAsync()) return; // Only seed if no users exist
+        var users = new List<OpenidUser>()
+        {
+            new OpenidUser
+            {
+                UserName = "test1",
+                Email = "test1@example.com",
+                PasswordHash = BC.HashPassword("Password123!"), // Hash the password!
+                Mobile = "110",
+                Remark = "Initial test user 1"
+            },
+            new OpenidUser
+            {
+                UserName = "test2",
+                Email = "test2@example.com",
+                PasswordHash = BC.HashPassword("Password123!"),
+                Mobile = "119",
+                Remark = "Initial test user 2"
+            }
+        };
+        await _context.Users.AddRangeAsync(users);
+        await _context.SaveChangesAsync();
+    }
 }
+//————————————————
+//版权声明：本文为CSDN博主「为自己_带盐」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+//原文链接：https://blog.csdn.net/juanhuge/article/details/148454418

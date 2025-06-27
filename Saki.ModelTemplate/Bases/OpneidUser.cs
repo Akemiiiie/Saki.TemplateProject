@@ -2,7 +2,7 @@
 
 namespace Saki.ModelTemplate.Bases
 {
-    public class OpneidUser
+    public class OpenidUser
     {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();

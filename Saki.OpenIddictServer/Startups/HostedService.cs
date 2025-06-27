@@ -12,6 +12,7 @@ public class HostedService : IHostedService
         _serviceProvider = serviceProvider;
     }
 
+    // 在服务启动时，为
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         using var scope = _serviceProvider.CreateScope();
@@ -29,7 +30,8 @@ public class HostedService : IHostedService
                 Permissions =
                 {
                     OpenIddictConstants.Permissions.Endpoints.Token,
-                    OpenIddictConstants.Permissions.GrantTypes.ClientCredentials
+                    OpenIddictConstants.Permissions.GrantTypes.ClientCredentials,
+                    OpenIddictConstants.Schemes.Bearer,
                 }
             });
     }
