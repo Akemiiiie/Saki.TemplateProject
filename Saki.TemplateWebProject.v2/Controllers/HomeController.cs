@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Com.Ctrip.Framework.Apollo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Validation.AspNetCore;
 using Panda.DynamicWebApi.Attributes;
@@ -18,10 +19,12 @@ public class HomeController : BaseController
 {
     [AutowiredProperty] private IUsersServiceInterface _usersService { get; set; }
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IConfiguration _configuration;
 
-    public HomeController(IHttpContextAccessor httpContextAccessor)
+    public HomeController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
     {
         _httpContextAccessor = httpContextAccessor;
+        _configuration = configuration;
     }
 
     /// <summary>
@@ -38,7 +41,6 @@ public class HomeController : BaseController
         return Ok(res);
     }
 
-
     /// <summary>
     /// 用户信息获取接口
     /// </summary>
@@ -49,6 +51,18 @@ public class HomeController : BaseController
     {
         var res = await _usersService.GetJoinList();
         return Ok(res);
+    }
+
+    /// <summary>
+    /// 用户信息获取接口
+    /// </summary>
+    /// <param name="Id">用户主键Id</param>
+    /// <returns>基础用户信息dto</returns>
+    [HttpGet]
+    public IActionResult GetSetting(string key)
+    {
+        var config = _configuration.GetValue<string>(key);
+        return Ok(config);
     }
 
     [NonDynamicWebApi]
@@ -62,5 +76,29 @@ public class HomeController : BaseController
     {
         var html = MiniProfiler.Current.RenderIncludes(_httpContextAccessor.HttpContext);
         return Ok(html.Value);
+    }
+}
+
+/// <summary>
+/// 心跳检查
+/// </summary>
+[Route("api/[controller]/[action]")]
+public class HealthController : BaseController
+{
+    private ILogger<HealthController> _logger;
+    public HealthController(ILogger<HealthController> logger)
+    {
+        _logger = logger;
+    }
+
+    /// <summary>
+    /// 健康检查
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public IActionResult CheckHealth()
+    {
+        _logger.LogInformation($"Check Health : {DateTime.Now}");
+        return Ok(DateTime.Now);
     }
 }

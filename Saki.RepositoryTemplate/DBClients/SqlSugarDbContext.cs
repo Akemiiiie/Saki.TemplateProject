@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Saki.RepositoryTemplate.Base;
+using Saki.BaseTemplate.ConfigerOptions;
 using SqlSugar;
 using StackExchange.Profiling;
 

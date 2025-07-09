@@ -11,14 +11,8 @@ namespace Saki.ModelTemplate.Bases
     /// 实体层
     /// </summary>
     [SugarTable("sys_User")]
-    public class UsersEntity
+    internal class UsersEntity: BaseEntity
     {
-        /// <summary>
-        /// 用户Id
-        /// </summary>
-        [SugarColumn(IsPrimaryKey = true, IsIdentity = true,ColumnName = "User_Id")]
-        public string Id { get; set; }
-        
         /// <summary>
         /// 用户名称
         /// </summary>

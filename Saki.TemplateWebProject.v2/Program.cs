@@ -1,5 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Com.Ctrip.Framework.Apollo;
+using Com.Ctrip.Framework.Apollo.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
@@ -9,26 +11,24 @@ using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Validation.AspNetCore;
 using Panda.DynamicWebApi;
+using Saki.BaseTemplate.ConfigerOptions;
 using Saki.MiniProfilerOption;
-using Saki.RepositoryTemplate.Base;
 using Saki.RepositoryTemplate.DBClients;
 using Saki.TemplateWebProject.v2.Startups;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// 读取配置文件
-var configBuilder = new ConfigurationBuilder();
-configBuilder.AddJsonFile("appsettings.json", true, true);
-IConfiguration configRoot = configBuilder.Build();
-configRoot.GetSection("ConnectionStrings").Get<BaseDbConfig>();
-
 // EF数据库上下文配置（需要升级到EF9.0否则无法正常使用EF，以及数据初始化功能，且会在初始化数据连接时报错）
 builder.Services.AddDbContext<EFDbContext>(options =>
     options.UseSqlServer(BaseDbConfig.DefaultConnection));
+
+// 读取阿波罗配置中心
+builder.Configuration.AddApollo(builder.Configuration.GetSection("Apollo")).AddDefault().AddNamespace("application"); // 私有命名空间;
+// 读取必须的配置项
+builder.Configuration.GetSection("ConnectionStrings").Get<BaseDbConfig>();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -65,6 +65,9 @@ builder.Services.AddOpenIddict()
         // Register the ASP.NET Core host.
         options.UseAspNetCore();
     });
+
+// 向Consul注册中注册
+// builder.Services.ConsulRegister(configRoot);
 
 builder.Services.AddAuthentication(options =>
 {

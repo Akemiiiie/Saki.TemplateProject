@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using Panda.DynamicWebApi;
-using Saki.RepositoryTemplate.Base;
+using Saki.BaseTemplate.ConfigerOptions;
 using Saki.TemplateWebProject.v1.Startups;
 using Swashbuckle.AspNetCore.SwaggerUI;
 

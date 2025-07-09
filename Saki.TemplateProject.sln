@@ -35,6 +35,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.Gateway", "Saki.Gatewa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.XTestProject", "Saki.XTestProject\Saki.XTestProject.csproj", "{E10D902F-CFAF-41FC-93E8-44DD5EC81814}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saki.ApolloConfigCenter", "Saki.ApolloConfigCenter\Saki.ApolloConfigCenter.csproj", "{9F20EC34-428E-45E8-B460-3E43950D61A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +105,14 @@ Global
 		{3143F51D-5157-4FE2-9D13-23EB078DD3CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3143F51D-5157-4FE2-9D13-23EB078DD3CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3143F51D-5157-4FE2-9D13-23EB078DD3CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E10D902F-CFAF-41FC-93E8-44DD5EC81814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E10D902F-CFAF-41FC-93E8-44DD5EC81814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E10D902F-CFAF-41FC-93E8-44DD5EC81814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E10D902F-CFAF-41FC-93E8-44DD5EC81814}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F20EC34-428E-45E8-B460-3E43950D61A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F20EC34-428E-45E8-B460-3E43950D61A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F20EC34-428E-45E8-B460-3E43950D61A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F20EC34-428E-45E8-B460-3E43950D61A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

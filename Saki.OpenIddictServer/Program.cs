@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using OpenIddict.Validation.AspNetCore;
 using Saki.OpenIddictServer.Authorization;
 using Saki.OpenIddictServer.Startups;
-using Saki.RepositoryTemplate.Base;
 using Saki.RepositoryTemplate.DBClients;
 using Quartz;
 using System.Security.Cryptography.X509Certificates;
+using Saki.BaseTemplate.ConfigerOptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
