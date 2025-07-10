@@ -36,11 +36,11 @@ public class BaseRepository<TEntity> : SqlSugarDbContext<TEntity>, IScopeDenpend
     }
 
     /// <summary>
-    ///     根据ID查询一条数据
+    /// 根据ID查询一条数据
     /// </summary>
     /// <param name="objId"></param>
     /// <returns></returns>
-    public async Task<TEntity> QueryByID(object objId)
+    public async Task<TEntity> QueryById(object objId)
     {
         return await Db.Queryable<TEntity>().InSingleAsync(objId);
     }

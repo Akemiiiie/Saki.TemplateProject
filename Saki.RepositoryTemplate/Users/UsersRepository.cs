@@ -24,7 +24,7 @@ public class UsersRepository : BaseRepository<UsersEntity>, IUsersRepository
     }
 
     /// <summary>
-    ///     多条件查询
+    /// 多条件查询
     /// </summary>
     /// <param name="query"></param>
     /// <returns></returns>
@@ -35,7 +35,7 @@ public class UsersRepository : BaseRepository<UsersEntity>, IUsersRepository
     }
 
     /// <summary>
-    ///     多条件分页查询
+    /// 多条件分页查询
     /// </summary>
     /// <param name="query"></param>
     /// <returns></returns>
@@ -55,7 +55,7 @@ public class UsersRepository : BaseRepository<UsersEntity>, IUsersRepository
         var datas = Db.Queryable<UsersEntity>().InnerJoin<UserTypeEntity>(
                 (user, userType) => user.Id == userType.UserId,
                 "Saki_MiniWorkSlave.dbo.UserType")
-            .Where((user, userType)=>userType.UserId == "1")
+            .Where((user, userType)=>userType.UserId.ToString() == "1")
             .Select((user, userType) => new UsersEntity()
             {
                 Id = user.Id

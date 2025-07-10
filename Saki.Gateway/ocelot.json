@@ -1,0 +1,51 @@
+{
+  "Routes": [
+    {
+      // 下游转发地址模板
+      "DownstreamPathTemplate": "/api/{url}",
+      // 下游服务的请求协议
+      "DownstreamScheme": "https",
+      // 下游服务的主机和端口
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+        // 配置多个下游服务时可自动负载均衡
+        //{
+        //  "Host": "localhost",
+        //  "Port": 80
+        //}
+      ],
+      // 上游请求地址模板
+      "UpstreamPathTemplate": "/SakiApi/{url}",
+      // 上游服务的请求协议
+      "UpstreamHttpMethod": [ "Get" ],
+      "ServiceName": "Saki.TemplateWebProject.v1",
+      // 是否启用服务发现
+      "UseServiceDiscovery": true,
+      // 负载均衡方式-轮询
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    // 网关外部暴露地址
+    "BaseUrl": "https://localhost:7000",
+    // 网关请求方式
+    "DownstreamScheme": "https",
+    // 服务注册于发现提供者
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    },
+    // 全局请求头
+    //"HttpHandlerOptions": {
+    //  "AllowAutoRedirect": true,
+    //  "UseCookieContainer": true,
+    //  "UseTracing": true
+    //}
+  }
+}

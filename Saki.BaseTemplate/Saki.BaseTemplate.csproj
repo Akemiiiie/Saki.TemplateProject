@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <Compile Remove="BaseEntity\**" />
+    <EmbeddedResource Remove="BaseEntity\**" />
+    <None Remove="BaseEntity\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BaseEntity\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

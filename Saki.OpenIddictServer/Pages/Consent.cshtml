@@ -1,0 +1,23 @@
+﻿@page
+@using Saki.OpenIddictServer.Resource
+@model Saki.OpenIddictServer.Pages.ConsentModel
+@{
+    ViewData["Title"] = "Authorize";
+}
+
+<h2>Authorize Application</h2>
+
+<p>Application <strong>@Model.ApplicationName</strong> wants to access your resources.</p>
+
+<form method="post">
+    <input type="hidden" asp-for="ReturnUrl" />
+    <input type="hidden" asp-for="Parameters" /> <!-- Pass parameters back -->
+
+    <p>Do you grant access?</p>
+
+    <button type="submit" name="grantButton" value="@Consts.GrantAccessValue">Grant Access</button>
+    <button type="submit" name="grantButton" value="@Consts.DenyAccessValue">Deny Access</button>
+</form>
+————————————————
+@* 版权声明：本文为CSDN博主「为自己_带盐」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/juanhuge/article/details/148454418 *@

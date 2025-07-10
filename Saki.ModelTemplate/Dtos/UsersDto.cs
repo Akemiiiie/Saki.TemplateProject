@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Saki.ModelTemplate.Bases;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +8,23 @@ using System.Threading.Tasks;
 namespace Saki.ModelTemplate.Dtos
 {
     /// <summary>
-    /// Dto层
+    /// 模拟UserDto
     /// </summary>
-    public class UsersDto
+    public class UsersDto: BaseDto
     {
-        public string Id { get; set; }
+        /// <summary>
+        /// 用户名称
+        /// </summary>
+        public required string UserName { get; set; }
+
+        /// <summary>
+        /// Email地址
+        /// </summary>
+        public required string Email { get; set; }
+
+        /// <summary>
+        /// hash后的密码
+        /// </summary>
+        public required string PasswordHash { get; set; } // 存储哈希后的密码
     }
 }

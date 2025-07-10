@@ -1,17 +1,18 @@
 ﻿using System.Reflection;
-using Saki.RepositoryTemplate.Base;
+using Saki.BaseTemplate.ConfigerOptions;
 using SqlSugar;
+using StackExchange.Profiling;
 
 namespace Saki.RepositoryTemplate.DBClients;
 
 public class SqlSugarDbContext<T> where T : class, new()
 {
     /// <summary>
-    ///     注入配置文件
+    /// 注入配置文件
     /// </summary>
 
-    //注意：不能写成静态的
-    public SqlSugarClient Db; //用来处理事务多表查询和复杂的操作
+    //注意：不能写成静态的，用来处理事务多表查询和复杂的操作
+    public SqlSugarClient Db; 
 
     public SqlSugarDbContext()
     {
@@ -45,6 +46,9 @@ public class SqlSugarDbContext<T> where T : class, new()
         //调式代码 用来打印SQL 
         Db.Aop.OnLogExecuting = (sql, pars) =>
         {
+            MiniProfiler.Current.
+                CustomTiming($"ConnId:[{Db.ContextID}] SQL：",
+                    "【SQL语句】：" + UtilMethods.GetNativeSql(sql, pars));
             Console.WriteLine(UtilMethods.GetNativeSql(sql, pars));
             //Console.WriteLine(sql + "\r\n" +
             //Db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));

@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace Saki.ModelTemplate.Bases
 {
     [SugarTable("UserType")]
-    public class UserTypeEntity
+    public class UserTypeEntity: Entity
     {
         /// <summary>
         /// 主键Id
         /// </summary>
         [SugarColumn(ColumnName = "User_Id")]
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
 
         /// <summary>
         /// 用户类型
