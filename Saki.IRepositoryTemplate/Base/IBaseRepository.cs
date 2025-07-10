@@ -14,7 +14,7 @@ namespace Saki.IRepositoryTemplate.Base
         /// </summary>
         /// <param name="objId"></param>
         /// <returns></returns>
-        Task<TEntity> QueryByID(object objId);
+        Task<TEntity> QueryById(object objId);
 
         /// <summary>
         /// 添加

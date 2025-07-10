@@ -33,7 +33,7 @@ public class HomeController : BaseController
     /// <param name="Id">用户主键Id</param>
     /// <returns>基础用户信息dto</returns>
     [HttpGet]
-    [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+    // [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     public async Task<IActionResult> GetUser([FromQuery] string Id)
     {
         // Test

@@ -21,14 +21,14 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// 读取阿波罗配置中心
+builder.Configuration.AddApollo(builder.Configuration.GetSection("Apollo")).AddDefault().AddNamespace("Saki_DevDept1.globalsetting"); // 私有命名空间;
+// 读取必须的配置项
+builder.Configuration.GetSection("ConnectionStrings").Get<BaseDbConfig>();
+
 // EF数据库上下文配置（需要升级到EF9.0否则无法正常使用EF，以及数据初始化功能，且会在初始化数据连接时报错）
 builder.Services.AddDbContext<EFDbContext>(options =>
     options.UseSqlServer(BaseDbConfig.DefaultConnection));
-
-// 读取阿波罗配置中心
-builder.Configuration.AddApollo(builder.Configuration.GetSection("Apollo")).AddDefault().AddNamespace("application"); // 私有命名空间;
-// 读取必须的配置项
-builder.Configuration.GetSection("ConnectionStrings").Get<BaseDbConfig>();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

@@ -31,7 +31,7 @@ namespace Saki.DomainTemplate.Users
         /// <returns></returns>
         public async Task<UsersEntity> GetUser(string id)
         {
-            var item = await _userRepositort.QueryByID(id);
+            var item = await _userRepositort.QueryById(id);
             return item;
         }
 
