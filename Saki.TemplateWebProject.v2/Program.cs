@@ -2,10 +2,12 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Com.Ctrip.Framework.Apollo;
 using Com.Ctrip.Framework.Apollo.Enums;
+using Consul;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
@@ -67,7 +69,18 @@ builder.Services.AddOpenIddict()
     });
 
 // ÏòConsul×¢²áÖÐ×¢²á
-// builder.Services.ConsulRegister(configRoot);
+builder.Services.ConsulRegister(builder.Configuration);
+
+// builder.Services.Configure<ConsulOptions>(builder.Configuration.GetSection("Consul"));
+
+// builder.Services.AddSingleton<IConsulClient>(_ =>
+//     new ConsulClient(cfg =>
+//     {
+//         var opt = _.GetRequiredService<IOptions<ConsulOptions>>().Value;
+//         cfg.Address = new Uri($"http://{opt.ConsulIP}:{opt.ConsulPort}");
+//     })
+// );
+// builder.Services.AddHostedService<ConsulRegistrationService>();
 
 builder.Services.AddAuthentication(options =>
 {

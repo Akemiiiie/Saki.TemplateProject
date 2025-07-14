@@ -21,13 +21,14 @@
       "UpstreamPathTemplate": "/SakiApi/{url}",
       // 上游服务的请求协议
       "UpstreamHttpMethod": [ "Get" ],
-      "ServiceName": "Saki.TemplateWebProject.v1",
-      // 是否启用服务发现
+      "ServiceName": "Saki.TemplateWebProject.v2",
+      //是否启用服务发现
       "UseServiceDiscovery": true,
-      // 负载均衡方式-轮询
+      //负载均衡方式-轮询
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
-      }
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true // 跳过证书认证（仅用于开发环境）
     }
   ],
   "GlobalConfiguration": {
@@ -39,13 +40,14 @@
     "ServiceDiscoveryProvider": {
       "Host": "localhost",
       "Port": 8500,
-      "Type": "Consul"
+      "Type": "Consul",
+      "UseServiceAddress": true
     },
     // 全局请求头
-    //"HttpHandlerOptions": {
-    //  "AllowAutoRedirect": true,
-    //  "UseCookieContainer": true,
-    //  "UseTracing": true
-    //}
+    "HttpHandlerOptions": {
+      "AllowAutoRedirect": true,
+      "UseCookieContainer": true,
+      "UseTracing": true,
+    },
   }
 }
