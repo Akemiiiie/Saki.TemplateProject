@@ -16,4 +16,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Saki.ApolloConfigCenter\Saki.ApolloConfigCenter.csproj" />
+  </ItemGroup>
+
 </Project>
