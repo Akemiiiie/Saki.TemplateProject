@@ -166,18 +166,11 @@ app.UseStaticFiles();
 // 启用分析器组件
 app.UseMiniProfiler();
 
-// 启用swagger
-app.UseSwagger();
 // 启用中间件为Swagger UI提供服务
-app.UseSwaggerUI(c =>
-{
-    // 需要将文件设置为嵌入资源，并且设置为较新则复制
-    c.IndexStream = () => Assembly.GetExecutingAssembly()
-        .GetManifestResourceStream("Saki.TemplateWebProject.v2.wwwroot.index.html");
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "我的MVC应用API V1");
-    // 可选：设置默认展开的API
-    c.DocExpansion(DocExpansion.None);
-});
+app.UseSwagger().UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    });
 
 app.UseRouting();
 app.UseAuthentication();
