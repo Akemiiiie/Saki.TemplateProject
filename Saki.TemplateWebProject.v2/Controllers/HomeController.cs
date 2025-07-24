@@ -12,7 +12,7 @@ namespace Saki.TemplateWebProject.v2.Controllers;
 
 /// <summary>
 /// Home控制器
-/// <remarks>当控制器与动态api混用时，需要在控制器中使用属性路由</remarks>
+/// <remarks>当控制器与动态 api 混用时，需要在控制器中使用属性路由</remarks>
 /// </summary>
 [Route("api/[controller]/[action]")]
 public class HomeController : BaseController

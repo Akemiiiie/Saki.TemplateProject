@@ -1,17 +1,18 @@
 {
   "Routes": [
-    {
-      "DownstreamPathTemplate": "/swagger/{everything}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7000 // 指向网关自身
-        }
-      ],
-      "UpstreamPathTemplate": "/gateway/swagger/{everything}",
-      "UpstreamHttpMethod": [ "Get" ]
-    },
+    //{
+    //  "DownstreamPathTemplate": "/api/{everything}",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7000
+    //    }
+    //  ],
+    //  "UpstreamPathTemplate": "/gateway/api/{everything}", // 添加 /gateway 前缀
+    //  "UpstreamHttpMethod": [ "*" ],
+    //  "SwaggerKey": "gateway"
+    //},
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "https",
@@ -21,77 +22,72 @@
           "Port": 7002
         }
       ],
-      "UpstreamPathTemplate": "/api/SakiApi/{everything}",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamPathTemplate": "/api/WebAPIDemo2/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST" ],
       "SwaggerKey": "WebAPIDemo2"
+      //"VirtualDirectory": "/WebAPIDemo2",
+      //"DangerousAcceptAnyServerCertificateValidator": true // 跳过HTTPS验证
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/WebAPIDemo3/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST" ],
+      "SwaggerKey": "WebAPIDemo3"
+      //"VirtualDirectory": "/WebAPIDemo2",
+      //"DangerousAcceptAnyServerCertificateValidator": true // 跳过HTTPS验证
     }
-    //{
-    //  // 下游转发地址模板
-    //  "DownstreamPathTemplate": "/api/{url}",
-    //  // 下游服务的请求协议
-    //  "DownstreamScheme": "https",
-    //  // 下游服务的主机和端口
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "Saki.TemplateWebProject.v2",
-    //      "Port": 7002
-    //    }
-    //    // 配置多个下游服务时可自动负载均衡
-    //    //{
-    //    //  "Host": "localhost",
-    //    //  "Port": 80
-    //    //}
-    //  ],
-    //  // 上游请求地址模板
-    //  "UpstreamPathTemplate": "/SakiApi/{url}",
-    //  // 上游服务的请求协议
-    //  "UpstreamHttpMethod": [ "Get" ],
-    //  "ServiceName": "Saki.TemplateWebProject.v2",
-    //  //是否启用服务发现
-    //  "UseServiceDiscovery": true,
-    //  //负载均衡方式-轮询
-    //  "LoadBalancerOptions": {
-    //    "Type": "RoundRobin"
-    //  },
-    //  "DangerousAcceptAnyServerCertificateValidator": true, // 跳过证书认证（仅用于开发环境）
-    //  "SwaggerKey": "WebAPIDemo2"
-    //}
   ],
   "SwaggerEndPoints": [
+    //{
+    //  "Key": "gateway",
+    //  "Config": [
+    //    {
+    //      "Name": "网关服务",
+    //      "Version": "v1",
+    //      "Url": "https://localhost:7000/swagger/v1/swagger.json" // 移除 /gateway
+    //    }
+    //  ]
+    //},
     {
       "Key": "WebAPIDemo2",
       "Config": [
         {
-          "Name": "WebAPIDemo2 API",
+          "Name": "WebAPIDemo2",
           "Version": "v1",
           "Url": "https://localhost:7002/swagger/v1/swagger.json"
         }
-      ],
-      //// 添加网关自身文档配置 ↓
-      //"Gateway": {
-      //  "DocsPath": "/swagger/v1/swagger.json",
-      //  "Info": {
-      //    "Title": "Gateway API",
-      //    "Version": "v1"
-      //  }
-      //}
+      ]
+    },
+    {
+      "Key": "WebAPIDemo3",
+      "Config": [
+        {
+          "Name": "WebAPIDemo3",
+          "Version": "v1",
+          "Url": "https://localhost:7003/swagger/v1/swagger.json"
+        }
+      ]
     }
   ],
   "GlobalConfiguration": {
     // 网关外部暴露地址
-    "BaseUrl": "https://localhost"
-    // 网关请求方式
+    "BaseUrl": "https://localhost",
+    //// 网关请求方式
     //"DownstreamScheme": "https",
-    // 服务注册于发现提供者
+    //// 服务注册于发现提供者
     //"ServiceDiscoveryProvider": {
-    //  "Type": "AppConfiguration",
-    //  "PollingIntervalSeconds": 10000
-    //}
-    // 全局请求头
-    //"HttpHandlerOptions": {
-    //  "AllowAutoRedirect": true,
-    //  "UseCookieContainer": true,
-    //  "UseTracing": true
+    //  "Type": "Consul",
+    //  "Host": "localhost",
+    //  "Port": 8500,
+    //  "PollingInterval": 1000, // 服务发现轮询间隔(ms)
+    //  "Token": null
     //}
   }
 }

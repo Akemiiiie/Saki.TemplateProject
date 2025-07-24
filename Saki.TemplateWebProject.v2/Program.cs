@@ -24,7 +24,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // 读取阿波罗配置中心
-builder.Configuration.AddApollo(builder.Configuration.GetSection("Apollo")).AddDefault().AddNamespace("Saki_DevDept1.globalsetting"); // 私有命名空间;
+builder.Configuration.AddApollo(builder.Configuration.GetSection("Apollo")).AddDefault().AddNamespace("Web1Api"); // 私有命名空间;
 // 读取必须的配置项
 builder.Configuration.GetSection("ConnectionStrings").Get<BaseDbConfig>();
 
@@ -94,7 +94,7 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Saki's Project Template",
+        Title = "Saki's Project Template web1",
         Version = "v1",
         Description = "这是一个用于构建工程的.netCore mvc项目模板",
         Contact = new OpenApiContact { Name = "Saki'CoreTemplate", Email = "2567241787@qq.com" }
