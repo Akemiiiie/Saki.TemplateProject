@@ -1,18 +1,5 @@
 {
   "Routes": [
-    //{
-    //  "DownstreamPathTemplate": "/api/{everything}",
-    //  "DownstreamScheme": "https",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "localhost",
-    //      "Port": 7000
-    //    }
-    //  ],
-    //  "UpstreamPathTemplate": "/gateway/api/{everything}", // 添加 /gateway 前缀
-    //  "UpstreamHttpMethod": [ "*" ],
-    //  "SwaggerKey": "gateway"
-    //},
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "https",
@@ -45,16 +32,6 @@
     }
   ],
   "SwaggerEndPoints": [
-    //{
-    //  "Key": "gateway",
-    //  "Config": [
-    //    {
-    //      "Name": "网关服务",
-    //      "Version": "v1",
-    //      "Url": "https://localhost:7000/swagger/v1/swagger.json" // 移除 /gateway
-    //    }
-    //  ]
-    //},
     {
       "Key": "WebAPIDemo2",
       "Config": [

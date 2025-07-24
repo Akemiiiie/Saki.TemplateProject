@@ -32,21 +32,6 @@ builder.Services.AddSwaggerForOcelot(builder.Configuration,
   (options) =>
   {
       options.GenerateDocsForGatewayItSelf = true;
-      //options.GenerateDocsDocsForGatewayItSelf(opt =>
-      //{
-      //    opt.GatewayDocsTitle = "Saki_Gateway API";
-      //    opt.GatewayDocsOpenApiInfo = new OpenApiInfo()
-      //    {
-      //        Title = "网关API Swagger文档",
-      //        Version = "v1",
-      //        Description = "这是网关中心的Swagger服务，仅用于提供部分内部测试接口.",
-      //        Contact = new OpenApiContact
-      //        {
-      //            Name = "Saki'Gateway Template",
-      //            Email = "2567241787@qq.com",
-      //        }
-      //    };
-      //});
   }
 );
 
@@ -57,7 +42,7 @@ builder.Services.AddSwaggerForOcelot(builder.Configuration,
 var app = builder.Build();
 
 app.UseHttpsRedirection();
-//app.UsePathBase("/gateway");
+app.UsePathBase("/gateway");
 app.UseRouting();
 app.UseAuthorization();
 
@@ -71,6 +56,8 @@ app.UseEndpoints(endpoints =>
 //app.UseSwaggerUI();
 app.UseSwaggerForOcelotUI(opt => 
 {
+    opt.DownstreamSwaggerEndPointBasePath = "/gateway/swagger/docs";
+    opt.PathToSwaggerGenerator = "/swagger/docs";
     opt.DownstreamSwaggerHeaders = new[]
     {
         new KeyValuePair<string, string>("Key", "Value")
