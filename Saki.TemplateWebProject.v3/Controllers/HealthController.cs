@@ -19,7 +19,7 @@ namespace Saki.TemplateWebProject.v3.Controllers
         public IActionResult CheckHealth()
         {
             _logger.LogInformation($"Check Health : {DateTime.Now}");
-            return Ok(DateTime.Now);
+            return Ok("Web3_Demo:" + DateTime.Now);
         }
     }
 }

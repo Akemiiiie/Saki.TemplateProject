@@ -3,17 +3,18 @@
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7002
-        }
-      ],
+      //"DownstreamHostAndPorts": [
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 7002
+      //  }
+      //],
+      "ServiceName": "WebAPIDemo2",
       "UpstreamPathTemplate": "/api/WebAPIDemo2/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST" ],
-      "SwaggerKey": "WebAPIDemo2"
-      //"VirtualDirectory": "/WebAPIDemo2",
-      //"DangerousAcceptAnyServerCertificateValidator": true // 跳过HTTPS验证
+      "SwaggerKey": "WebAPIDemo2",
+      "VirtualDirectory": "/WebAPIDemo2",
+      "DangerousAcceptAnyServerCertificateValidator": true // 跳过HTTPS验证
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -32,15 +33,35 @@
     }
   ],
   "SwaggerEndPoints": [
+    //{
+    //  "Key": "WebAPIDemo2",
+    //  "Config": [
+    //    {
+    //      "Name": "WebAPIDemo2",
+    //      "Version": "v1",
+    //      "Url": "https://localhost:7002/swagger/v1/swagger.json"
+    //    }
+    //  ]
+    //},
     {
       "Key": "WebAPIDemo2",
+      "VersionPlaceholder": "{version}",
+      "KeyToPath": "WebAPIDemo2",
       "Config": [
         {
-          "Name": "WebAPIDemo2",
+          "Name": "WebAPIDemo2 API",
           "Version": "v1",
-          "Url": "https://localhost:7002/swagger/v1/swagger.json"
+          //"Url": "https://localhost:7002/swagger/v1/swagger.json",
+          "Service": {
+            "Name": "WebAPIDemo2",
+            "Path": "/swagger/v1/swagger.json"
+          }
         }
-      ]
+      ],
+      //"HostOverride": null,
+      //"TransformByOcelotConfig": true,
+      //"RemoveUnusedComponentsFromScheme": true,
+      //"TakeServersFromDownstreamService": false
     },
     {
       "Key": "WebAPIDemo3",
@@ -56,15 +77,15 @@
   "GlobalConfiguration": {
     // 网关外部暴露地址
     "BaseUrl": "https://localhost",
-    //// 网关请求方式
-    //"DownstreamScheme": "https",
-    //// 服务注册于发现提供者
-    //"ServiceDiscoveryProvider": {
-    //  "Type": "Consul",
-    //  "Host": "localhost",
-    //  "Port": 8500,
-    //  "PollingInterval": 1000, // 服务发现轮询间隔(ms)
-    //  "Token": null
-    //}
+    // 网关请求方式
+    "DownstreamScheme": "https",
+    // 服务注册于发现提供者
+    "ServiceDiscoveryProvider": {
+      //"Type": "Consul", 由于SwaggerForOcelot库 当前版本存在bug，暂时注释该属性 但Consul仍然正常使用
+      "Host": "localhost",
+      "Port": 8500,
+      "PollingInterval": 1000, // 服务发现轮询间隔(ms)
+      "Token": null
+    }
   }
 }

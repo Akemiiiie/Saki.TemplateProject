@@ -1,25 +1,13 @@
-using Com.Ctrip.Framework.Apollo;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
-using MMLib.SwaggerForOcelot.Configuration;
-using MMLib.SwaggerForOcelot.DependencyInjection;
-using MMLib.SwaggerForOcelot.Middleware;
-using MMLib.SwaggerForOcelot.Repositories;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using Ocelot.Values;
-using Saki.Gateway.Interceptor;
-using Saki.Gateway.Repository;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Swashbuckle.AspNetCore.SwaggerUI;
+using Ocelot.Provider.Consul;
 
 var builder = WebApplication.CreateBuilder(args);
 // 读取配置文件
 //builder.Configuration.AddApollo(builder.Configuration.GetSection("Apollo")).AddDefault().AddNamespace("Ocelot.Setting"); // 私有命名空间;
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 // Add services to the container.
-builder.Services.AddOcelot(builder.Configuration);
+builder.Services.AddOcelot(builder.Configuration).AddConsul();
 //builder.Services.AddSingleton<ISwaggerDownstreamInterceptor, PublishedDownstreamInterceptor>();
 //builder.Services.AddSingleton<ISwaggerEndpointConfigurationRepository, DummySwaggerEndpointRepository>();
 builder.Services.AddControllers();
@@ -62,6 +50,8 @@ app.UseSwaggerForOcelotUI(opt =>
     {
         new KeyValuePair<string, string>("Key", "Value")
     };
+}, 
+action => {
+    
 }).UseOcelot().Wait();
-
 app.Run();

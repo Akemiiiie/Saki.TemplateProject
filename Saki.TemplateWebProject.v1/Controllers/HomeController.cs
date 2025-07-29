@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Saki.BaseTemplate.AutofacRegister;
+using Saki.AutoFac.AutofacRegister;
 using Saki.BaseTemplate.BaseControllers;
 using Saki.InterfaceTemplate.Users;
 

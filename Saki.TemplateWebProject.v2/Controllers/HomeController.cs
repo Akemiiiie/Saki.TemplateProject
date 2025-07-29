@@ -99,6 +99,6 @@ public class HealthController : BaseController
     public IActionResult CheckHealth()
     {
         _logger.LogInformation($"Check Health : {DateTime.Now}");
-        return Ok(DateTime.Now);
+        return Ok("Web2_Demo:" + DateTime.Now);
     }
 }

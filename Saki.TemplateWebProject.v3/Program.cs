@@ -13,7 +13,7 @@ builder.Services.AddMvc();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo() { 
-        Title = "Saki's Project Template web2", 
+        Title = "Saki's Project Template web3", 
         Version = "v1" ,
         Description = "这是一个用于构建工程的.netCore mvc项目模板",
         Contact = new OpenApiContact { Name = "Saki'CoreTemplate", Email = "2567241787@qq.com" }

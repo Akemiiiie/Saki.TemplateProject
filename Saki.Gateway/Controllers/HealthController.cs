@@ -19,7 +19,7 @@ namespace Saki.Gateway.Controllers
         public IActionResult CheckHealth()
         {
             _logger.LogInformation($"Check Health : {DateTime.Now}");
-            return Ok(DateTime.Now);
+            return Ok("Gateway:" + DateTime.Now);
         }
     }
 }

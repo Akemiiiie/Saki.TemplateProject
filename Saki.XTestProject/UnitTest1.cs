@@ -11,21 +11,5 @@ namespace Saki.XTestProject
             int c = a + b; 
             Assert.Equal(5, c);
         }
-
-        /// <summary>
-        /// ²âÊÔ·½·¨Ê¾Àý
-        /// </summary>
-        [Theory]
-        [MemberData(nameof())]
-        public void TestFunc()
-        {
-
-        }
-
-
-        public List<> GetData()
-        {
-            
-        }
     }
 }
