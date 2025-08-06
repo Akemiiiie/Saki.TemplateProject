@@ -84,7 +84,7 @@ builder.Services.ConsulRegister(builder.Configuration);
 
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
 });
 
