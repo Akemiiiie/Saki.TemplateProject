@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Saki.BaseTemplate\Saki.BaseTemplate.csproj" />
     <ProjectReference Include="..\Saki.DomainTemplate\Saki.DomainTemplate.csproj" />
+    <ProjectReference Include="..\Saki.DynamicWebApi\Saki.DynamicWebApi.csproj" />
     <ProjectReference Include="..\Saki.RepositoryTemplate\Saki.RepositoryTemplate.csproj" />
   </ItemGroup>
 

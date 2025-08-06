@@ -24,7 +24,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // 读取阿波罗配置中心
-builder.Configuration.AddApollo(builder.Configuration.GetSection("Apollo")).AddDefault().AddNamespace("Saki_DevDept1.globalsetting"); // 私有命名空间;
+builder.Configuration.AddApollo(builder.Configuration.GetSection("Apollo")).AddDefault().AddNamespace("Web1Api"); // 私有命名空间;
 // 读取必须的配置项
 builder.Configuration.GetSection("ConnectionStrings").Get<BaseDbConfig>();
 
@@ -94,7 +94,7 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Saki's Project Template",
+        Title = "Saki's Project Template web1",
         Version = "v1",
         Description = "这是一个用于构建工程的.netCore mvc项目模板",
         Contact = new OpenApiContact { Name = "Saki'CoreTemplate", Email = "2567241787@qq.com" }
@@ -166,18 +166,11 @@ app.UseStaticFiles();
 // 启用分析器组件
 app.UseMiniProfiler();
 
-// 启用swagger
-app.UseSwagger();
 // 启用中间件为Swagger UI提供服务
-app.UseSwaggerUI(c =>
-{
-    // 需要将文件设置为嵌入资源，并且设置为较新则复制
-    c.IndexStream = () => Assembly.GetExecutingAssembly()
-        .GetManifestResourceStream("Saki.TemplateWebProject.v2.wwwroot.index.html");
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "我的MVC应用API V1");
-    // 可选：设置默认展开的API
-    c.DocExpansion(DocExpansion.None);
-});
+app.UseSwagger().UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    });
 
 app.UseRouting();
 app.UseAuthentication();

@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Mvc;
-using Saki.BaseTemplate.AutofacRegister;
+using Saki.AutoFac.AutofacRegister;
 using Saki.DomainTemplate.Users;
 using Saki.InterfaceTemplate.Users;
 using Saki.RepositoryTemplate.Base;
