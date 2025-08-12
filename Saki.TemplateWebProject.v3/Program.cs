@@ -5,8 +5,8 @@ using Saki.TemplateWebProject.v3.Startups;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddApollo(builder.Configuration.GetSection("Apollo")).AddDefault().
-    AddNamespace("Web2Api"); // Ë½ÓĞÃüÃû¿Õ¼ä;
-// ÏòConsul×¢²áÖĞ×¢²á
+    AddNamespace("Web2Api"); // ç§æœ‰å‘½åç©ºé—´;
+// å‘Consulæ³¨å†Œä¸­å¿ƒæ³¨å†Œ
 builder.Services.ConsulRegister(builder.Configuration);
 // Add services to the container.
 builder.Services.AddMvc();
@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo() { 
         Title = "Saki's Project Template web3", 
         Version = "v1" ,
-        Description = "ÕâÊÇÒ»¸öÓÃÓÚ¹¹½¨¹¤³ÌµÄ.netCore mvcÏîÄ¿Ä£°å",
+        Description = "è¿™æ˜¯ä¸€ä¸ªåŸºäº.NET Core MVCæ¶æ„çš„é¡¹ç›®æ¨¡æ¿",
         Contact = new OpenApiContact { Name = "Saki'CoreTemplate", Email = "2567241787@qq.com" }
     });
 });

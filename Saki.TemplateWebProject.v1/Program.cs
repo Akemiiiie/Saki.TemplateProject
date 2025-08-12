@@ -16,7 +16,7 @@ configBuilder.AddJsonFile("appsettings.json", true, true);
 IConfiguration configRoot = configBuilder.Build();
 configRoot.GetSection("BaseDBConfig").Get<BaseDbConfig>();
 
-// ×Ô¶¯×¢Èë
+// è‡ªåŠ¨æ³¨å†Œ
 builder.Services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder => { builder.RegisterModule<AutofacRegisterModule>(); });
@@ -32,11 +32,11 @@ builder.Services.AddSwaggerGen(options =>
     {
         Title = "Saki's Project Template",
         Version = "v1",
-        Description = "ÕâÊÇÒ»¸öÓÃÓÚ¹¹½¨¹¤³ÌµÄ.netCore mvcÏîÄ¿Ä£°å",
+        Description = "è¿™æ˜¯ä¸€ä¸ªåŸºäº.NET Core MVCæ¶æ„çš„é¡¹ç›®æ¨¡æ¿",
         Contact = new OpenApiContact { Name = "Saki'CoreTemplate", Email = "2567241787@qq.com" }
     });
     options.DocInclusionPredicate((name, api) => api.HttpMethod != null);
-    // ¿ÉÑ¡£ºÎªXML×¢ÊÍÌí¼ÓÖ§³Ö
+    // ä¸ºXMLæ³¨é‡Šæä¾›æ”¯æŒ
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
@@ -54,14 +54,14 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-// ÆôÓÃÖĞ¼ä¼şÎªSwagger JSONÉú³É¶Ëµã
+// é…ç½®ä¸­é—´ä»¶ä¸ºSwagger JSONæä¾›è·¯ç”±
 app.UseSwagger();
 
-// ÆôÓÃÖĞ¼ä¼şÎªSwagger UIÌá¹©·şÎñ
+// é…ç½®ä¸­é—´ä»¶ä¸ºSwagger UIæä¾›æœåŠ¡
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ÎÒµÄMVCÓ¦ÓÃAPI V1");
-    // ¿ÉÑ¡£ºÉèÖÃÄ¬ÈÏÕ¹¿ªµÄAPI
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "æˆ‘çš„MVCåº”ç”¨API V1");
+    // ä¸ºé€‰æ‹©æ€§å±•å¼€APIæä¾›æ”¯æŒ
     c.DocExpansion(DocExpansion.None);
 });
 

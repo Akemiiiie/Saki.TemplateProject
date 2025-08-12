@@ -23,12 +23,12 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// ¶ÁÈ¡°¢²¨ÂŞÅäÖÃÖĞĞÄ
-builder.Configuration.AddApollo(builder.Configuration.GetSection("Apollo")).AddDefault().AddNamespace("Web1Api"); // Ë½ÓĞÃüÃû¿Õ¼ä;
-// ¶ÁÈ¡±ØĞëµÄÅäÖÃÏî
+// è·å–é…ç½®ä¸­å¿ƒé…ç½®ä¿¡æ¯
+builder.Configuration.AddApollo(builder.Configuration.GetSection("Apollo")).AddDefault().AddNamespace("Web1Api"); // ç§æœ‰å‘½åç©ºé—´;
+// è·å–æ•°æ®åº“è¿æ¥é…ç½®
 builder.Configuration.GetSection("ConnectionStrings").Get<BaseDbConfig>();
 
-// EFÊı¾İ¿âÉÏÏÂÎÄÅäÖÃ£¨ĞèÒªÉı¼¶µ½EF9.0·ñÔòÎŞ·¨Õı³£Ê¹ÓÃEF£¬ÒÔ¼°Êı¾İ³õÊ¼»¯¹¦ÄÜ£¬ÇÒ»áÔÚ³õÊ¼»¯Êı¾İÁ¬½ÓÊ±±¨´í£©
+// EFæ•°æ®åº“è¿æ¥é…ç½®ï¼Œéœ€è¦è¯´æ˜çš„æ˜¯ç”±äºEF9.0å¼€å§‹æ— æ³•ä½¿ç”¨EFè‡ªå¸¦æ•°æ®åˆå§‹åŒ–åŠŸèƒ½ï¼Œæ•…è€Œåœ¨åˆå§‹åŒ–çš„æ—¶å€™éœ€è¦æ‰‹åŠ¨é…ç½®
 builder.Services.AddDbContext<EFDbContext>(options =>
     options.UseSqlServer(BaseDbConfig.DefaultConnection));
 
@@ -36,29 +36,29 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<EFDbContext>();
 
-// Autofac×Ô¶¯×¢Èë(´Ë´¦»á×¢ÈëÊı¾İ¿âÉÏÏÂÎÄµÄÊı¾İ¿âÁ¬½Ó)
+// Autofacè‡ªåŠ¨æ³¨å†Œ(æ­¤å¤„æ³¨å†Œäº†æ•°æ®åº“è®¿é—®çš„æ•°æ®åº“ä»“å‚¨)
 builder.Services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder => { builder.RegisterModule<AutofacRegisterModule>(); });
 
-// Ìí¼ÓMVCÖĞ¼ä¼ş,²»Ìí¼Ó»áµ¼ÖÂÎŞ·¨Õı³£·ÃÎÊ½Ó¿Ú
+// æ·»åŠ MVCä¸­é—´ä»¶,é˜²æ­¢æ¥å£æ— æ³•è¢«åŠ¨æ€è®¿é—®
 builder.Services.AddRazorPages();
 builder.Services.AddMvc();
-// ¶¯Ì¬api
+// åŠ¨æ€api
 builder.Services.AddDynamicWebApi();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddOpenIddict()
     .AddValidation(options =>
     {
-        // ÅäÖÃjwt¼øÈ¨·şÎñÆ÷
+        // è®¾ç½®jwtæˆæƒéªŒè¯ä¸­å¿ƒ
         options.SetIssuer("https://localhost:7001/"); // Auth server URL
         options.AddAudiences("service-worker"); // Must match the audience in the auth server
-        // ÅäÖÃ¿Í»§¶ËÒÔ¼°¿Í»§¶ËÃØÔ¿
+        // è®¾ç½®å®¢æˆ·ç«¯éªŒè¯å®¢æˆ·ç«¯å¯†é’¥
         options.UseIntrospection().SetClientId("service-worker").SetClientSecret("388D45FA-B36B-4988-BA59-B187D329C207");
 
         // options.AddEncryptionCertificate();
-        // ÅäÖÃ¶Ô³Æ¼ÓÃÜÃØÔ¿
+        // è®¾ç½®å¯¹ç§°åŠ å¯†å¯†é’¥
         options.AddEncryptionKey(new SymmetricSecurityKey(
             Convert.FromBase64String("DRjd/GnduI3Efzen9V9BvbNUfc/VKgXltV7Kbk9sMkY="))); // Use secure key management in production!
 
@@ -68,7 +68,7 @@ builder.Services.AddOpenIddict()
         options.UseAspNetCore();
     });
 
-// ÏòConsul×¢²áÖĞ×¢²á
+// æ³¨å†ŒConsulæ³¨å†ŒæœåŠ¡
 builder.Services.ConsulRegister(builder.Configuration);
 
 // builder.Services.Configure<ConsulOptions>(builder.Configuration.GetSection("Consul"));
@@ -89,14 +89,14 @@ builder.Services.AddAuthentication(options =>
 });
 
 
-// Ìí¼Óswagger
+// æ·»åŠ swagger
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "Saki's Project Template web1",
         Version = "v1",
-        Description = "ÕâÊÇÒ»¸öÓÃÓÚ¹¹½¨¹¤³ÌµÄ.netCore mvcÏîÄ¿Ä£°å",
+        Description = "è¿™æ˜¯ä¸€ä¸ªç®€å•çš„.netCore mvcé¡¹ç›®æ¨¡æ¿",
         Contact = new OpenApiContact { Name = "Saki'CoreTemplate", Email = "2567241787@qq.com" }
     });
     options.AddSecurityDefinition(
@@ -105,7 +105,7 @@ builder.Services.AddSwaggerGen(options =>
         {
             Flows = new OpenApiOAuthFlows
             {
-                // Ö¤Êé»ñÈ¡µØÖ·
+                // æˆæƒè·å–åœ°å€
                 ClientCredentials = new OpenApiOAuthFlow
                 {
                     Scopes = new Dictionary<string, string>
@@ -134,15 +134,15 @@ builder.Services.AddSwaggerGen(options =>
         }
     );
     options.DocInclusionPredicate((name, api) => api.HttpMethod != null);
-    // ¿ÉÑ¡£ºÎªXML×¢ÊÍÌí¼ÓÖ§³Ö
+    // é€‰æ‹©ä¸ºXMLæ³¨é‡Šæä¾›æ”¯æŒ
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
 });
 
-// Ìí¼Ó·ÖÎöÆ÷ÖĞ¼ä¼ş
+// æ·»åŠ æ€§èƒ½åˆ†æä¸­é—´ä»¶
 builder.Services.AddMiniProfiler(ProfilerDefaultOption.GetProfilerDefaultOption)
-    // AddEntityFrameworkÊÇÒª¼à¿ØEntityFrameworkCoreÉú³ÉµÄSQL
+    // AddEntityFrameworkéœ€è¦é…ç½®EntityFrameworkCoreçš„SQL
     .AddEntityFramework();
 
 
@@ -163,10 +163,10 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-// ÆôÓÃ·ÖÎöÆ÷×é¼ş
+// ä½¿ç”¨æ€§èƒ½åˆ†æä¸­é—´ä»¶
 app.UseMiniProfiler();
 
-// ÆôÓÃÖĞ¼ä¼şÎªSwagger UIÌá¹©·şÎñ
+// æ·»åŠ ä¸­é—´ä»¶ä¸ºSwagger UIæä¾›æœåŠ¡
 app.UseSwagger().UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
@@ -175,7 +175,7 @@ app.UseSwagger().UseSwaggerUI(c =>
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-// ÅäÖÃÂ·ÓÉ
+// æ·»åŠ è·¯ç”±
 app.MapControllers();
 
 app.MapRazorPages()

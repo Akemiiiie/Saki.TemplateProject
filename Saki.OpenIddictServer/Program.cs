@@ -11,25 +11,25 @@ using Saki.BaseTemplate.ConfigerOptions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// EFÊı¾İ¿âÉÏÏÂÎÄÅäÖÃ£¨ĞèÒªÉı¼¶µ½EF9.0·ñÔòÎŞ·¨Õı³£Ê¹ÓÃEF£¬ÒÔ¼°Êı¾İ³õÊ¼»¯¹¦ÄÜ£¬ÇÒ»áÔÚ³õÊ¼»¯Êı¾İÁ¬½ÓÊ±±¨´í£©
+// EFæ•°æ®åº“è¿æ¥é…ç½®ï¼Œéœ€è¦è¯´æ˜çš„æ˜¯ç”±äºEF9.0å¼€å§‹æ— æ³•ä½¿ç”¨EFè‡ªå¸¦æ•°æ®åˆå§‹åŒ–åŠŸèƒ½ï¼Œæ•…è€Œåœ¨åˆå§‹åŒ–çš„æ—¶å€™éœ€è¦æ‰‹åŠ¨é…ç½®
 builder.Services.AddDbContext<EFDbContext>(options =>
     options.UseSqlServer(BaseDbConfig.DefaultConnection));
 //
 // builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 //     .AddEntityFrameworkStores<EFDbContext>();
 
-// Æô¶¯ºóÌ¨ÈÎÎñÓÃÓÚ¼àÌıÇëÇóÊÇ·ñºÏ·¨
+// åå°ä»»åŠ¡æœåŠ¡ç”¨äºæ£€æŸ¥æ˜¯å¦åˆæ³•
 builder.Services.AddHostedService<HostedService>();
 
-// ÅäÖÃ Entity Framework Core Ê¹ÓÃ Microsoft SQL Server¡£
+// é…ç½® Entity Framework Core ä½¿ç”¨ Microsoft SQL Serveræ•°æ®åº“
 builder.Services.AddDbContext<EFDbContext>(options =>
 {
-    // ÅäÖÃ EfCore Ê¹ÓÃ Microsoft SQL Server Êı¾İ¿â
+    // é…ç½® EfCore ä½¿ç”¨ Microsoft SQL Server æ•°æ®åº“
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
         builder => { builder.MigrationsAssembly("Saki.OpenIddictServer"); });
 
-    // ×¢²áOpenIddictËùĞèµÄÊı¾İÊµÌå¼¯¡£
-    // ×¢Òâ£ºÈç¹ûÄãĞèÒªÌæ»»Ä¬ÈÏµÄOpenIddictÊµÌå£¬ÇëÊ¹ÓÃ·ºĞÍÖØÔØ·½·¨
+    // æ³¨å†ŒOpenIddictæ‰€éœ€çš„å®ä½“æ¨¡å‹
+    // æ³¨æ„ï¼šè¿™äº›é…ç½®éœ€è¦æ›¿æ¢é»˜è®¤çš„OpenIddictå®ä½“
     options.UseOpenIddict();
 });
 //
@@ -38,7 +38,7 @@ builder.Services.AddDbContext<EFDbContext>(options =>
 //     "005917",
 //     X509KeyStorageFlags.MachineKeySet |
 //     X509KeyStorageFlags.PersistKeySet |
-//     X509KeyStorageFlags.Exportable); // µ¼³öÈ¨ÏŞ¿ÉÑ¡
+//     X509KeyStorageFlags.Exportable); // æƒé™å¯é€‰
 // var signingCert = new X509Certificate2(
 //     "signing.pfx",
 //     "005917",
@@ -48,51 +48,51 @@ builder.Services.AddDbContext<EFDbContext>(options =>
 
 builder.Services.AddOpenIddict().AddCore(options =>
     {
-        // ÅäÖÃ OpenIddict Ê¹ÓÃ Entity Framework Core ´æ´¢ºÍÄ£ĞÍ¡£
-        // ×¢Òâ£ºµ÷ÓÃ ReplaceDefaultEntities() À´Ìæ»»Ä¬ÈÏÊµÌå¡£
+        // é…ç½® OpenIddict ä½¿ç”¨ Entity Framework Core å­˜å‚¨æ¨¡å‹
+        // æ³¨æ„ï¼šè¿™äº›é…ç½®éœ€è¦ä½¿ç”¨ ReplaceDefaultEntities() æ›¿æ¢é»˜è®¤å®ä½“
         options.UseEntityFrameworkCore()
             .UseDbContext<EFDbContext>();
         options.UseQuartz();
     })
-    // ×¢²á OpenIddict ·şÎñÆ÷×é¼ş
+    // æ³¨å†Œ OpenIddict æœåŠ¡å™¨ç»„ä»¶
     .AddServer(options =>
     {
-        // ÁîÅÆ¶Ëµã
+        // æˆæƒç«¯ç‚¹
         options.SetAuthorizationEndpointUris("connect/authorize")
             .SetTokenEndpointUris("connect/token");
-        options.RegisterScopes("service-worker"); // ±ØĞëÓë×ÊÔ´·şÎñÆ÷µÄAudienceÒ»ÖÂ
-        // options.SetLogoutEndpointUris("/connect/logout"); // µÇ³ö¶Ëµã
-        // options.AcceptAnonymousClients();              // ÔÊĞí¹«¹²¿Í»§¶Ë
-        options.AllowPasswordFlow()                    // ÔÊĞíÃÜÂëÊÚÈ¨Á÷³Ì
-            .AllowClientCredentialsFlow();              // ÆôÓÃ¿Í»§¶ËÆ¾¾İÁ÷
-        // options.AcceptAnonymousClients();              // ÔÊĞí¹«¹²¿Í»§¶Ë
+        options.RegisterScopes("service-worker"); // æ³¨å†Œèµ„æºèŒƒå›´ï¼Œä½œä¸ºAudienceä¹‹ä¸€
+        // options.SetLogoutEndpointUris("/connect/logout"); // æ³¨é”€ç«¯ç‚¹
+        // options.AcceptAnonymousClients();              // æ¥å—åŒ¿åå®¢æˆ·ç«¯
+        options.AllowPasswordFlow()                    // å…è®¸å¯†ç æˆæƒ
+            .AllowClientCredentialsFlow();              // å…è®¸å®¢æˆ·ç«¯å‡­è¯æˆæƒ
+        // options.AcceptAnonymousClients();              // æ¥å—åŒ¿åå®¢æˆ·ç«¯
 
-        // ×¢²áÇ©ÃûºÍ¼ÓÃÜÖ¤Êé
+        // æ³¨å†ŒåŠ å¯†å’Œç­¾åè¯ä¹¦
         options.AddDevelopmentEncryptionCertificate()
             .AddDevelopmentSigningCertificate();
         // options.AddEncryptionCertificate(encryptionCert);
         // options.AddSigningCertificate(signingCert);
 
-        // ×¢²á ASP.NET Core Ö÷»ú²¢ÇÒÅäÖÃ ASP.NET Core Ñ¡Ïî
+        // æ³¨å†Œ ASP.NET Core é›†æˆ
         options.UseAspNetCore()
             .EnableTokenEndpointPassthrough();
-        // ²»Ê¹ÓÃÖ¤Êé¶ÔJWT½øĞĞ¼ÓÃÜ£¨½öÔÚ²âÊÔÊ±Ê¹ÓÃ£¬ÓÃÓÚ½âÃÜjwt²é¿´¶ÔÓ¦ÄÚÈİ½øĞĞµ÷ÊÔ£©
+        // ä½¿ç”¨JWTä½œä¸ºè®¿é—®ä»¤ç‰Œæ ¼å¼ï¼Œå¼€å‘æ—¶ä½¿ç”¨ï¼Œç”Ÿäº§æ—¶æŸ¥çœ‹å¯¹åº”æ•°æ®ä¸­çš„å­—æ®µ
         //options.DisableAccessTokenEncryption();
 
         // Register the ASP.NET Core host and configure the ASP.NET Core-specific options.
         options.UseAspNetCore()
-            // ÔÊĞíÔÚÊÚÈ¨¶ËµãÖĞÊ¹ÓÃ×Ô¶¨ÒåÂß¼­
+            // ä½¿ç”¨è‡ªå®šä¹‰æˆæƒç«¯ç‚¹
             .EnableAuthorizationEndpointPassthrough()
-            // ÔÊĞíÔÚÁîÅÆ¶ËµãÖĞÊ¹ÓÃ×Ô¶¨ÒåÂß¼­
+            // ä½¿ç”¨è‡ªå®šä¹‰ä»¤ç‰Œç«¯ç‚¹
             .EnableTokenEndpointPassthrough()
-            // ¼¯³ÉUseStatusCodePages
+            // ä½¿ç”¨UseStatusCodePages
             .EnableStatusCodePagesIntegration();
     })
     .AddValidation(options =>
     {
-        // ´Ó±¾µØ OpenIddict ·şÎñÆ÷ÊµÀıµ¼ÈëÅäÖÃ
+        // å¼•ç”¨ OpenIddict æœåŠ¡å™¨ç»„ä»¶
         options.UseLocalServer();
-        // ×¢²áhostÖ÷»ú
+        // æ³¨å†Œhost
         options.UseAspNetCore();
     });
 
@@ -135,7 +135,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        // ¿çÓòÅäÖÃ£¬¸ù¾İÉú³É¾ßÌåĞèÒª½øĞĞÅäÖÃ
+        // å…è®¸çš„æ¥æºï¼Œæ·»åŠ æˆ–åˆ é™¤éœ€è¦çš„
         policy.WithOrigins("https://localhost:7002", "https://localhost:7003", "https://oidcdebugger.com")
             .AllowAnyHeader()
             .AllowAnyMethod();
@@ -147,7 +147,7 @@ builder.Services.AddSwaggerGen(); // Optional: For API testing
 builder.Services.AddTransient<AuthorizationService>(); // Register custom service
 builder.Services.AddTransient<ClientsSeeder>();      // Register seeder
 
-// Ìí¼ÓMVCÖĞ¼ä¼ş,²»Ìí¼Ó»áµ¼ÖÂÎŞ·¨Õı³£·ÃÎÊ½Ó¿Ú
+// é…ç½®MVCæ¨¡å—ï¼Œå¦åˆ™æ— æ³•è°ƒç”¨æ¥å£
 // builder.Services.AddRazorPages();
 // builder.Services.AddMvc();
 
@@ -186,7 +186,7 @@ using (var scope = app.Services.CreateScope())
     await seeder.SeedAsync();
 }
 
-// // ÅäÖÃÂ·ÓÉ
+//// é…ç½®è·¯ç”±
 // app.MapControllerRoute(
 //     "default",
 //     "{controller=Home}/{action=Index}/{id?}");
